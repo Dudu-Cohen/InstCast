@@ -1,4 +1,4 @@
-package com.cdh.instacast.api.rest;
+package com.cdh.instacast.restapi;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

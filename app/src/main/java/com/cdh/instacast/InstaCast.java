@@ -2,7 +2,7 @@ package com.cdh.instacast;
 
 import android.app.Application;
 
-import com.cdh.instacast.api.rest.RestManager;
+import com.cdh.instacast.restapi.RestManager;
 
 /**
  * Created by Dudu_Cohen on 19/08/2017.

@@ -1,4 +1,4 @@
-package com.cdh.instacast.api.rest;
+package com.cdh.instacast.restapi;
 
 
 import com.cdh.instacast.utils.Consts;
