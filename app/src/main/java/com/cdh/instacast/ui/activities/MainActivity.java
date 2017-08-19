@@ -19,9 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
 import com.cdh.instacast.R;
+import com.cdh.instacast.pojo.InstagramMedia;
 import com.cdh.instacast.restapi.RestManager;
 import com.cdh.instacast.restapi.RxTransformer;
-import com.cdh.instacast.pojo.InstagramMedia;
 import com.cdh.instacast.ui.adapters.InstagramMediaAdapter;
 import com.cdh.instacast.utils.Consts;
 import com.cdh.instacast.utils.LocationHelper;
@@ -113,8 +113,12 @@ public class MainActivity extends AppCompatActivity {
     private void setMediaList(InstagramMedia instagramMedia) {
 
         if(mAdapter == null){
-            mAdapter = new InstagramMediaAdapter();
+
+            // set layout manager
             mInstagramMediaList.setLayoutManager(new LinearLayoutManager(this));
+
+            // set adapter
+            mAdapter = new InstagramMediaAdapter();
             mInstagramMediaList.setAdapter(mAdapter);
         }
 
