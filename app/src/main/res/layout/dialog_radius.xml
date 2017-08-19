@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/dialog_radius_root_element"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/dialog_radius_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        tools:text="Media Radius: 10"
+        />
+
+    <SeekBar
+        android:id="@+id/dialog_radius_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_radius_text"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_below="@id/dialog_radius_seek_bar"
+        android:layout_alignStart="@id/dialog_radius_seek_bar"
+        android:text="Min:\n500"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_below="@id/dialog_radius_seek_bar"
+        android:layout_alignEnd="@id/dialog_radius_seek_bar"
+        android:text="Max:\n5000"
+        />
+
+</RelativeLayout>
