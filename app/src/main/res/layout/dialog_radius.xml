@@ -32,7 +32,7 @@
         android:padding="10dp"
         android:layout_below="@id/dialog_radius_seek_bar"
         android:layout_alignStart="@id/dialog_radius_seek_bar"
-        android:text="Min:\n500"
+        android:text="Min:\n500m"
         />
 
     <android.support.v7.widget.AppCompatTextView
@@ -42,7 +42,7 @@
         android:padding="10dp"
         android:layout_below="@id/dialog_radius_seek_bar"
         android:layout_alignEnd="@id/dialog_radius_seek_bar"
-        android:text="Max:\n5000"
+        android:text="Max:\n5000m"
         />
 
 </RelativeLayout>

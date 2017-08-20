@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.cdh.instacast.R;
 import com.cdh.instacast.pojo.InstagramMedia;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.List;
 
@@ -69,6 +70,12 @@ public class InstagramMediaAdapter extends RecyclerView.Adapter<InstagramMediaAd
 
                 // load main image
                 loadImage(mainImage, media.getImages().getStandard_resolution().getUrl());
+
+                // set on click for open image gallery
+                mainImage.setOnClickListener(view -> new ImageViewer.Builder<>(view.getContext(), mInstagramMediaList)
+                        .setFormatter(customImage -> customImage.getImages().getStandard_resolution().getUrl())
+                        .setStartPosition(getAdapterPosition())
+                        .show());
 
                 // load user image
                 loadImage(userImage, media.getUser().getProfile_picture());

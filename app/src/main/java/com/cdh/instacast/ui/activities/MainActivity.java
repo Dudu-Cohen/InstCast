@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         // radius title
         AppCompatTextView currentRadiusTxt = v. findViewById(R.id.dialog_radius_text);
-        currentRadiusTxt.setText(String.format("Radius: %d", mRadius));
+        currentRadiusTxt.setText(String.format("Radius: %dm", mRadius));
         SeekBar sbBetVal = v.findViewById(R.id.dialog_radius_seek_bar);
         sbBetVal.setMax(Consts.MAX_DISTANCE);
         sbBetVal.setProgress(mRadius);
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                currentRadiusTxt.setText(String.format("Radius: %d", progress));
+                currentRadiusTxt.setText(String.format("Radius: %dm", progress));
                 mRadius = progress;
             }
         });
