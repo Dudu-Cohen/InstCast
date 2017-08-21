@@ -26,6 +26,8 @@ import com.cdh.instacast.ui.adapters.InstagramMediaAdapter;
 import com.cdh.instacast.utils.Consts;
 import com.cdh.instacast.utils.LocationHelper;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // execute instagram media request
         mCompositeSubscription.add(RestManager.get().api().getImageByLocation(mLocation.getLatitude(), mLocation.getLongitude(), mRadius)
                 .compose(RxTransformer.applyIOSchedulers())
+                .timeout(60, TimeUnit.SECONDS)
                 .subscribe(instagramMedia -> setMediaList(instagramMedia), MainActivity.this::onError));
 
     }
