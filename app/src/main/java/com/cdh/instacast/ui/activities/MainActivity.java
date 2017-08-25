@@ -63,22 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void getLocation() {
         if(weHaveLocationPermission()) {
-
-            LocationHelper locationHelper = new LocationHelper(this);
-
-            locationHelper.getCurrentLocation(new LocationHelper.OnLocationReady() {
-                @Override
-                public void onLocationReady(Location location) {
-                    mLocation = location;
-                    getImagesByLocation();
-                }
-
-                @Override
-                public void onLocationDisabled() {
-                    showMassageDialog("Pleas enable your GPS and open the app again.");
-                }
-            });
-
+            mLocation = LocationHelper.getLocation(this);
+            if(mLocation == null){
+                showMassageDialog("Pleas enable your GPS and open the app again.");
+            } else {
+                getImagesByLocation();
+            }
         } else {
             requestForLocationPermission();
         }

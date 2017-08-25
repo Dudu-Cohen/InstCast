@@ -11,70 +11,65 @@ import java.util.Calendar;
  * Created by Dudu_Cohen on 19/08/2017.
  */
 
-public class LocationHelper implements LocationListener {
+public class LocationHelper {
 
-    LocationManager mLocationManager;
-    OnLocationReady mOnLocationReady;
-    Context mContext;
+    public static Location getLocation(Context context) {
+        // flag for GPS status
+        boolean isGPSEnabled = false;
 
-    public LocationHelper(Context context) {
-        this.mContext = context;
-    }
+        // flag for network status
+        boolean isNetworkEnabled = false;
 
-    public void getCurrentLocation(OnLocationReady onLocationReady) {
+        // flag for passive status
+        boolean isPassiveEnabled = false;
 
-        mOnLocationReady = onLocationReady;
-        mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        Location location = null;
 
-        // ignore the permission err we ask it in the main activity
-        Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        try {
+            LocationManager locationManager = (LocationManager) context
+                    .getSystemService(context.LOCATION_SERVICE);
 
-        // if location exists and last time we ask for location is less then two min return last know location
-        if(location != null && location.getTime() > Calendar.getInstance().getTimeInMillis() - 2 * 60 * 1000) {
-            // Do something with the recent location fix
-            //  otherwise wait for the update below
-            if(onLocationReady != null){
-                onLocationReady.onLocationReady(location);
+            // getting GPS status
+            isGPSEnabled = locationManager
+                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            // getting network status
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            // getting passive status
+            isPassiveEnabled = locationManager
+                    .isProviderEnabled(LocationManager.PASSIVE_PROVIDER);
+
+
+            if (isPassiveEnabled) {
+                if (location == null) {
+                    if (locationManager != null) {
+                        location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                    }
+                }
             }
-        }
-
-        // else ask for new location
-        else {
-
-            // ignore the permission err we ask it in the main activity
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        }
-
-    }
-
-
-    public void onLocationChanged(Location location) {
-        if (location != null) {
-            mLocationManager.removeUpdates(this);
-            if(mOnLocationReady != null){
-                mOnLocationReady.onLocationReady(location);
+            // First get location from Network Provider
+            if (isNetworkEnabled && location == null) {
+                if (locationManager != null) {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                }
             }
+            // if GPS Enabled get lat/long using GPS Services
+            if (isGPSEnabled && location == null) {
+                if (locationManager != null) {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+
+        return location;
     }
-
-    // Required functions
-    public void onProviderDisabled(String arg0) {
-         if(mOnLocationReady != null){
-             mOnLocationReady.onLocationDisabled();
-         }
-    }
-
-    public void onProviderEnabled(String arg0) {}
-
-    public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}
-
-    /**
-     * On Location Ready interface
-     * Will invoked when location is ready
-     */
-    public interface OnLocationReady{
-       void onLocationReady(Location location);
-       void onLocationDisabled();
-    }
-
 }
